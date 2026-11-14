@@ -374,7 +374,7 @@ class Game {
     this.text('堕聖ザビエル', W / 2, 380, 52, '#e8c25a', 'center', '#7a0a1c');
     this.text('— 4体のボスを撃ち落とせ —', W / 2, 428, 15, '#e9e2f0', 'center');
 
-    const keys = [['boss_s', '小', 1.0], ['boss_m', '中', 0.7], ['boss_l', '大', 0.55], ['xavier', '終', 0.75]];
+    const keys = [['boss_s', '小', 1.0], ['boss_m', '中', 0.7], ['boss_l', '大', 0.55], ['mystery', '???', 0.75]];
     keys.forEach(([k, label, s], i) => {
       const img = this.images[k];
       const cx = 66 + i * 116, cy = 520 + Math.sin(this.t * 2 + i) * 4;
