@@ -361,7 +361,7 @@ class Game {
   drawTitle() {
     const { ctx, W, H } = this;
     this.skies[3].draw(ctx);
-    const xi = this.images.xavier;
+    const xi = this.images.mystery;
     ctx.globalAlpha = 0.35;
     ctx.drawImage(xi, W / 2 - xi.width * 1.5, 60, xi.width * 3, xi.height * 3);
     ctx.globalAlpha = 1;
@@ -424,6 +424,7 @@ function loadImages(map) {
     boss_m: 'img/boss_m.png',
     boss_l: 'img/boss_l.png',
     xavier: 'img/xavier.png',
+    mystery: 'img/mystery.png',
     ...BACKGROUND_IMAGES,
   }).then((images) => {
     Input.init(canvas);
