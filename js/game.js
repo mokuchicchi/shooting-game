@@ -361,8 +361,8 @@ class Game {
   drawTitle() {
     const { ctx, W, H } = this;
     this.skies[3].draw(ctx);
-    const xi = this.images.mystery;
-    ctx.globalAlpha = 0.35;
+    const xi = this.images.xavier_silhouette;
+    ctx.globalAlpha = 0.85;
     ctx.drawImage(xi, W / 2 - xi.width * 1.5, 60, xi.width * 3, xi.height * 3);
     ctx.globalAlpha = 1;
     const g = ctx.createLinearGradient(0, 300, 0, H);
@@ -425,6 +425,7 @@ function loadImages(map) {
     boss_l: 'img/boss_l.png',
     xavier: 'img/xavier.png',
     mystery: 'img/mystery.png',
+    xavier_silhouette: 'img/xavier_silhouette.png',
     ...BACKGROUND_IMAGES,
   }).then((images) => {
     Input.init(canvas);
