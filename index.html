@@ -1,9 +1,42 @@
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body></body>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>堕聖ザビエル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap">
+<link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body>
+  <main class="layout">
+    <div class="screen">
+      <canvas id="game" width="480" height="720" aria-label="ゲーム画面"></canvas>
+      <button id="bombBtn" class="touch-btn" type="button">ボム</button>
+    </div>
+    <aside class="manual">
+      <h1>堕聖ザビエル</h1>
+      <p class="lead">4体のボスを倒せ。最後に待つのは、闇に堕ちた聖者。</p>
+      <h2>操作</h2>
+      <dl class="keys">
+        <dt>移動</dt><dd>矢印キー / WASD</dd>
+        <dt>ショット</dt><dd>Z / スペース（押しっぱなし）</dd>
+        <dt>ボム</dt><dd>X（弾を全部消す）</dd>
+        <dt>一時停止</dt><dd>P / Esc</dd>
+        <dt>音のオンオフ</dt><dd>M</dd>
+      </dl>
+      <p class="hint">マウス：機体がカーソルについてくる（押している間ショット）。</p>
+      <p class="hint">スマホ：画面をなぞって移動（ショットは自動）。</p>
+      <p class="hint">タイトルで 1〜4 キーを押すと、そのボスから始められます。</p>
+    </aside>
+  </main>
+
+  <script src="js/input.js?v=7"></script>
+  <script src="js/sound.js?v=7"></script>
+  <script src="js/background.js?v=7"></script>
+  <script src="js/bullets.js?v=7"></script>
+  <script src="js/player.js?v=7"></script>
+  <script src="js/bosses.js?v=7"></script>
+  <script src="js/game.js?v=7"></script>
+</body>
 </html>
