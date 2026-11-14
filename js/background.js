@@ -6,7 +6,7 @@
 //   clouds_far_1〜3.png   奥の雲（透明背景・上下がつながっていてループできる）
 //   clouds_near_1〜3.png  手前の雲（同上）
 //   cathedral_1〜3.png    聖堂（ラスボスの形態 1・2・3）
-
+// 123
 // 背景画像のファイル一覧。game.js の画像読み込みに混ぜて使う。
 const BACKGROUND_IMAGES = {};
 for (const n of [1, 2, 3]) {
