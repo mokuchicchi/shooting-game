@@ -117,7 +117,7 @@ class Boss {
   }
 
   damage(n) {
-    if (this.entering || this.dying > 0 || this.invuln > 0) return false;
+    if (this.dead || this.entering || this.dying > 0 || this.invuln > 0) return false; // 撃破とボムの二重判定防止
     this.hp -= n;
     this.flash = 0.04;
     this.game.score += 10 * n;
@@ -205,7 +205,7 @@ const BOSS_DEFS = [
     phases: [
       {
         name: '見習いの羽ばたき',
-        hp: 220,
+        hp: 170,
         attack(b, B) {
           const m = b.point(50, 36);
           b.burst('aim', 1.0, 3, 0.09, () => B.add(m.x, m.y, b.aim(m), 240, 'red'));
@@ -214,7 +214,7 @@ const BOSS_DEFS = [
       },
       {
         name: '赤い目覚め',
-        hp: 260,
+        hp: 170,
         tint: 'rgba(255,0,40,0.18)',
         aura: '255,60,80',
         attack(b, B) {
@@ -303,7 +303,7 @@ const BOSS_DEFS = [
     phases: [
       {
         name: '紅蓮の翼',
-        hp: 650,
+        hp: 850,
         aura: '255,40,60',
         attack(b, B) {
           const m = b.point(99, 45);
@@ -322,7 +322,7 @@ const BOSS_DEFS = [
       },
       {
         name: '滅びの咆哮',
-        hp: 750,
+        hp: 950,
         tint: 'rgba(255,0,30,0.28)',
         aura: '255,30,50',
         attack(b, B) {
@@ -378,7 +378,7 @@ const BOSS_DEFS = [
     phases: [
       {
         name: '聖者',
-        hp: 800,
+        hp: 1300,
         flash: '255,220,120',
         attack(b, B) {
           const halo = b.point(72, 29), hand = b.point(19, 34), heart = b.point(87, 50);
@@ -394,7 +394,7 @@ const BOSS_DEFS = [
       },
       {
         name: '殉教の焔',
-        hp: 900,
+        hp: 1700,
         tint: 'rgba(200,10,30,0.38)',
         aura: '255,90,40',
         flash: '255,60,40',
@@ -415,7 +415,7 @@ const BOSS_DEFS = [
       },
       {
         name: '堕ちたる聖者',
-        hp: 1100,
+        hp: 2000,
         tint: 'rgba(40,0,70,0.62)',
         aura: '170,60,255',
         flash: '160,40,255',
