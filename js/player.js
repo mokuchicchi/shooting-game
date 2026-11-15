@@ -45,6 +45,7 @@ class Player {
     this.hitRadius = 2.5;
     this.lives = 3;
     this.bombs = 3;
+    this.power = 1; //追加 ショットの強さ
     this.t = 0;
     this.spawn();
   }
@@ -95,11 +96,7 @@ class Player {
   }
 
   fire() {
-    const s = this.game.shots;
-    const y = this.y - 14;
-    s.push({ x: this.x - 5, y, vx: 0, vy: -900, dmg: 1 });
-    s.push({ x: this.x + 5, y, vx: 0, vy: -900, dmg: 1 });
-    for (const a of [-0.16, 0.16]) s.push({ x: this.x, y, vx: Math.sin(a) * 900, vy: -Math.cos(a) * 900, dmg: 1 });
+    PowerShot.fire(this); // item.jsで管理
     if (Math.floor(this.t * 13) % 2 === 0) Sound.play('shot');
   }
 

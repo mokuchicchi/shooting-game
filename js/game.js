@@ -48,6 +48,7 @@ class Game {
     this.cathedral = new CathedralBackground(this.W, this.H, images);
     this.bg = this.skies[1];
     this.particles = new Particles();
+    this.items = new ItemSystem(this);
     this.bullets = new BulletSystem(this);
     this.shots = [];
     this.player = null;
@@ -70,6 +71,7 @@ class Game {
     this.score = 0;
     this.runTime = 0;
     this.player = new Player(this);
+    this.items.reset();
     this.bossIndex = bossIndex;
     this.startBoss();
   }
@@ -77,6 +79,7 @@ class Game {
   startBoss() {
     const def = BOSS_DEFS[this.bossIndex];
     if (def.cathedral) { this.cathedral.setStage(1); this.bg = this.cathedral; } else { this.bg = this.skies[def.background()]; }
+    this.items.reset(); 
     this.boss = new Boss(this, def);
     this.bullets = new BulletSystem(this);
     this.shots = [];
@@ -85,7 +88,8 @@ class Game {
     this.warnBeeps = 0;
   }
 
-  bossDying() {
+  bossDying(boss) {
+    this.items.spawn(boss);
     this.state = 'defeat';
     this.defeatT = 4;
     this.showBanner('撃破！', '255,220,120');
@@ -150,7 +154,12 @@ class Game {
         this.bg.update(dt);
         this.particles.update(dt);
         if (Input.hit('Escape')) { this.state = 'title'; return; }
-        if (start) { Sound.play('select'); this.newRun(this.bossIndex); }
+        if (start) {
+          Sound.play('select');
+          const power = this.player.power; 
+          this.newRun(this.bossIndex);
+          this.player.power = power; // 同じボスで再挑戦の場合、同じ強さでスタート
+        }
         break;
       case 'clear':
         this.skies[1].update(dt);
@@ -168,7 +177,7 @@ class Game {
     this.runTime += dt;
     // 無敵モード中は K で今のフェーズを飛ばせる
     const b = this.boss;
-    if (this.godMode && Input.hit('KeyK') && b && !b.entering && b.dying <= 0 && b.invuln <= 0) {
+    if (this.godMode && Input.hit('KeyK') && this.state === 'battle' && b && !b.dead && !b.entering && b.dying <= 0 && b.invuln <= 0) { // アイテムの二重出現防止
       b.hp = 0;
       b.nextPhase();
     }
@@ -234,6 +243,7 @@ class Game {
         }
       }
     }
+    this.items.update(dt);
     this.particles.update(dt);
   }
 
@@ -259,6 +269,7 @@ class Game {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(Math.round(s.x - 1), Math.round(s.y - 7), 2, 14);
     }
+    this.items.draw(ctx);
     if (this.player) this.player.draw(ctx);
     this.bullets.draw(ctx);
     this.particles.draw(ctx);
