@@ -318,6 +318,34 @@ const Sound = {
     }
   },
 
+  // BGMを一時停止
+  bgmPaused: false,
+
+  pauseBGM() {
+    this.bgmPaused = true;
+
+    if (this.bgmGain && this.ctx) {
+      this.bgmGain.gain.setTargetAtTime(
+        0,
+        this.ctx.currentTime,
+        0.03
+      );
+    }
+  },
+
+  // BGMを再開
+  resumeBGM() {
+    this.bgmPaused = false;
+
+    if (this.bgmGain && this.ctx) {
+      this.bgmGain.gain.setTargetAtTime(
+        this.muted ? 0 : 0.10,
+        this.ctx.currentTime,
+        0.05
+      );
+    }
+  },
+
   setMuted(value) {
     this.muted = value;
 
@@ -325,7 +353,7 @@ const Sound = {
       const now = this.ctx.currentTime;
       this.bgmGain.gain.cancelScheduledValues(now);
       this.bgmGain.gain.setTargetAtTime(
-        value ? 0 : 0.10,
+        (value || this.bgmPaused) ? 0 : 0.10,
         now,
         0.05
       );
