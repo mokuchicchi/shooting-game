@@ -374,7 +374,7 @@ const BOSS_DEFS = [
     phases: [
       {
         name: '聖者',
-        hp: 1300,
+        hp:2200,
         flash: '255,220,120',
         attack(b, B) {
           const halo = b.point(72, 29), hand = b.point(19, 34), heart = b.point(87, 50);
@@ -390,7 +390,7 @@ const BOSS_DEFS = [
       },
       {
         name: '殉教の焔',
-        hp: 1700,
+        hp: 2500,
         tint: 'rgba(200,10,30,0.38)',
         aura: '255,90,40',
         flash: '255,60,40',
@@ -411,7 +411,7 @@ const BOSS_DEFS = [
       },
       {
         name: '堕ちたる聖者',
-        hp: 2000,
+        hp: 3000,
         tint: 'rgba(40,0,70,0.62)',
         aura: '170,60,255',
         flash: '160,40,255',
