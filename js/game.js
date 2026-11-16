@@ -70,6 +70,8 @@ class Game {
   newRun(bossIndex) {
     this.score = 0;
     this.runTime = 0;
+    Sound.unlock();
+    Sound.startBGM();
     this.player = new Player(this);
     this.items.reset();
     this.bossIndex = bossIndex;
