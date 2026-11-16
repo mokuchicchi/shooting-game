@@ -208,6 +208,8 @@ const Sound = {
     if (!this.ctx) return;
     if (this.bgmTimer) return;
 
+    this.bgmPaused = false;
+
     const c = this.ctx;
     const beat = 60 / 300; // BPM 300
 

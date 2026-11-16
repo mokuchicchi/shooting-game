@@ -158,7 +158,11 @@ class Game {
       case 'gameover':
         this.bg.update(dt);
         this.particles.update(dt);
-        if (Input.hit('Escape')) { this.state = 'title'; return; }
+        if (Input.hit('Escape')) {
+          this.state = 'title';
+          Sound.stopBGM();
+          return;
+        }
         if (start) {
           Sound.play('select');
           const power = this.player.power; 
@@ -170,7 +174,10 @@ class Game {
         this.skies[1].update(dt);
         this.particles.update(dt);
         if (Math.random() < 0.15) this.particles.spawn(Math.random() * this.W, Math.random() * this.H * 0.6, 20, Math.random() < 0.5 ? '255,220,120' : '255,120,160', 150, 1, 3);
-        if (start && this.t - this.clearAt > 1.5) { this.state = 'title'; }
+        if (start && this.t - this.clearAt > 1.5) {
+          this.state = 'title';
+          Sound.stopBGM();
+        }
         break;
       default:
         if (Input.hit('KeyP', 'Escape')) {
@@ -250,6 +257,7 @@ class Game {
           this.saveHigh();
           this.state = 'clear';
           this.clearAt = this.t;
+          Sound.stopBGM();
         }
       }
     }
