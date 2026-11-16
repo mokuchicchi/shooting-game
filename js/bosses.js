@@ -303,12 +303,12 @@ const BOSS_DEFS = [
         aura: '255,40,60',
         attack(b, B) {
           const m = b.point(99, 45);
-          if (b.every('spiral', 0.06)) {
+          if (b.every('spiral', 0.03)) {
             b.vars.rot = (b.vars.rot ?? 0) + 0.21;
             B.add(m.x, m.y, b.vars.rot, 150, 'purple');
             B.add(m.x, m.y, b.vars.rot + Math.PI, 150, 'purple');
           }
-          if (b.every('missile', 3.5)) {
+          if (b.every('missile', 1.0)) {
             for (const [sx, sy, a] of [[20, 30, -2.3], [40, 40, -2.0], [178, 30, -0.8], [158, 40, -1.1]]) {
               const p = b.point(sx, sy);
               B.add(p.x, p.y, a, 170, 'missile', { homing: 1.6, turn: 2.6, trail: '255,60,80' });
@@ -332,7 +332,7 @@ const BOSS_DEFS = [
             const ang = b.aim(m);
             B.laser({ from: () => b.point(99, 45), angle: ang, warn: 1.0, dur: 1.3, width: 30 });
           }
-          if (b.every('missile', 4)) {
+          if (b.every('missile', 1.5)) {
             for (let i = 0; i < 6; i++) {
               const p = b.point(i < 3 ? 25 + i * 15 : 128 + (i - 3) * 15, 35);
               B.add(p.x, p.y, -DOWN + (i < 3 ? -0.9 : 0.9), 180, 'missile', { homing: 1.8, turn: 2.8, trail: '255,60,80' });
