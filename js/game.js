@@ -70,6 +70,8 @@ class Game {
   newRun(bossIndex) {
     this.score = 0;
     this.runTime = 0;
+    Sound.unlock();
+    Sound.startBGM();
     this.player = new Player(this);
     this.items.reset();
     this.bossIndex = bossIndex;
@@ -128,7 +130,7 @@ class Game {
 
   update(dt) {
     this.t += dt;
-    if (Input.hit('KeyM')) Sound.muted = !Sound.muted;
+    if (Input.hit('KeyM')) Sound.setMuted(!Sound.muted);
     const start = Input.hit('KeyZ', 'Space', 'Enter') || Input.tapped;
 
     // 隠しコマンド：↑↑↓↓←→←→ で無敵モードの切り替え（タイトルでも戦闘中でも可）
@@ -148,12 +150,19 @@ class Game {
         if (start) { Sound.play('select'); this.newRun(0); }
         break;
       case 'paused':
-        if (Input.hit('KeyP', 'Escape') || Input.tapped) this.state = this.prevState;
+        if (Input.hit('KeyP', 'Escape') || Input.tapped) {
+          this.state = this.prevState;
+          Sound.resumeBGM(); // BGM再開
+        }
         break;
       case 'gameover':
         this.bg.update(dt);
         this.particles.update(dt);
-        if (Input.hit('Escape')) { this.state = 'title'; return; }
+        if (Input.hit('Escape')) {
+          this.state = 'title';
+          Sound.stopBGM();
+          return;
+        }
         if (start) {
           Sound.play('select');
           const power = this.player.power; 
@@ -165,10 +174,18 @@ class Game {
         this.skies[1].update(dt);
         this.particles.update(dt);
         if (Math.random() < 0.15) this.particles.spawn(Math.random() * this.W, Math.random() * this.H * 0.6, 20, Math.random() < 0.5 ? '255,220,120' : '255,120,160', 150, 1, 3);
-        if (start && this.t - this.clearAt > 1.5) { this.state = 'title'; }
+        if (start && this.t - this.clearAt > 1.5) {
+          this.state = 'title';
+          Sound.stopBGM();
+        }
         break;
       default:
-        if (Input.hit('KeyP', 'Escape')) { this.prevState = this.state; this.state = 'paused'; return; }
+        if (Input.hit('KeyP', 'Escape')) {
+          this.prevState = this.state;
+          this.state = 'paused';
+          Sound.pauseBGM(); // BGM停止
+          return;
+        }
         this.updatePlay(dt);
     }
   }
@@ -240,6 +257,7 @@ class Game {
           this.saveHigh();
           this.state = 'clear';
           this.clearAt = this.t;
+          Sound.stopBGM();
         }
       }
     }
