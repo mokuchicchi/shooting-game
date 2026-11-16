@@ -208,7 +208,7 @@ const BOSS_DEFS = [
         hp: 170,
         attack(b, B) {
           const m = b.point(50, 36);
-          b.burst('aim', 1.0, 3, 0.09, () => B.add(m.x, m.y, b.aim(m), 240, 'red'));
+          b.burst('aim', 1.0, 1, 0.09, () => B.add(m.x, m.y, b.aim(m), 240, 'red'));
           if (b.every('fan', 3.2)) B.fan(m.x, m.y, 5, 1.0, DOWN, 170, 'pink');
         },
       },
@@ -219,12 +219,8 @@ const BOSS_DEFS = [
         aura: '255,60,80',
         attack(b, B) {
           const m = b.point(50, 36);
-          b.burst('aim', 0.85, 3, 0.1, () => B.fan(m.x, m.y, 3, 0.35, b.aim(m), 250, 'red'));
-          if (b.every('wide', 2.4)) {
-            B.fan(m.x, m.y, 9, 2.0, DOWN, 160, 'pink');
-            b.vars.r = (b.vars.r ?? 0) + 0.2;
-            B.ring(m.x, m.y, 16, 120, b.vars.r, 'redSmall');
-          }
+          b.burst('aim', 1.0, 3, 0.09, () => B.add(m.x, m.y, b.aim(m), 240, 'red'));
+          if (b.every('fan', 3.2)) B.fan(m.x, m.y, 5, 1.0, DOWN, 170, 'pink');
         },
       },
     ],
