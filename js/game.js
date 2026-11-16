@@ -400,7 +400,7 @@ class Game {
     ctx.fillStyle = g;
     ctx.fillRect(0, 300, W, H - 300);
 
-    this.text('堕聖ザビエル', W / 2, 380, 52, '#e8c25a', 'center', '#7a0a1c');
+    this.text('ZANGE', W / 2, 380, 52, '#e8c25a', 'center', '#7a0a1c');
     this.text('— 4体のボスを撃ち落とせ —', W / 2, 428, 15, '#e9e2f0', 'center');
 
     const keys = [['boss_s', '小', 1.0], ['boss_m', '中', 0.7], ['boss_l', '大', 0.55], ['mystery', '???', 0.75]];
