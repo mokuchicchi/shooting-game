@@ -405,7 +405,7 @@ const BOSS_DEFS = [
             b.vars.dir = b.vars.dir === 1 ? -1 : 1;
             const from = () => b.point(116, 18);
             const p = from();
-            B.laser({ from, angle: b.aim(p) - 0.55 * b.vars.dir, sweep: 0.45 * b.vars.dir, warn: 1.0, dur: 2.4, width: 22, color: '255,120,40' });
+            B.laser({ from, angle: b.aim(p) - 0.50 * b.vars.dir, sweep: 0.30 * b.vars.dir, warn: 1.0, dur: 2.4, width: 22, color: '255,120,40' });
           }
         },
       },
