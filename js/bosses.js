@@ -208,7 +208,7 @@ const BOSS_DEFS = [
         hp: 170,
         attack(b, B) {
           const m = b.point(50, 36);
-          b.burst('aim', 1.0, 3, 0.09, () => B.add(m.x, m.y, b.aim(m), 240, 'red'));
+          b.burst('aim', 1.0, 1, 0.09, () => B.add(m.x, m.y, b.aim(m), 240, 'red'));
           if (b.every('fan', 3.2)) B.fan(m.x, m.y, 5, 1.0, DOWN, 170, 'pink');
         },
       },
@@ -219,12 +219,8 @@ const BOSS_DEFS = [
         aura: '255,60,80',
         attack(b, B) {
           const m = b.point(50, 36);
-          b.burst('aim', 0.85, 3, 0.1, () => B.fan(m.x, m.y, 3, 0.35, b.aim(m), 250, 'red'));
-          if (b.every('wide', 2.4)) {
-            B.fan(m.x, m.y, 9, 2.0, DOWN, 160, 'pink');
-            b.vars.r = (b.vars.r ?? 0) + 0.2;
-            B.ring(m.x, m.y, 16, 120, b.vars.r, 'redSmall');
-          }
+          b.burst('aim', 1.0, 3, 0.09, () => B.add(m.x, m.y, b.aim(m), 240, 'red'));
+          if (b.every('fan', 3.2)) B.fan(m.x, m.y, 5, 1.0, DOWN, 170, 'pink');
         },
       },
     ],
@@ -307,12 +303,12 @@ const BOSS_DEFS = [
         aura: '255,40,60',
         attack(b, B) {
           const m = b.point(99, 45);
-          if (b.every('spiral', 0.06)) {
+          if (b.every('spiral', 0.03)) {
             b.vars.rot = (b.vars.rot ?? 0) + 0.21;
             B.add(m.x, m.y, b.vars.rot, 150, 'purple');
             B.add(m.x, m.y, b.vars.rot + Math.PI, 150, 'purple');
           }
-          if (b.every('missile', 3.5)) {
+          if (b.every('missile', 1.0)) {
             for (const [sx, sy, a] of [[20, 30, -2.3], [40, 40, -2.0], [178, 30, -0.8], [158, 40, -1.1]]) {
               const p = b.point(sx, sy);
               B.add(p.x, p.y, a, 170, 'missile', { homing: 1.6, turn: 2.6, trail: '255,60,80' });
@@ -336,7 +332,7 @@ const BOSS_DEFS = [
             const ang = b.aim(m);
             B.laser({ from: () => b.point(99, 45), angle: ang, warn: 1.0, dur: 1.3, width: 30 });
           }
-          if (b.every('missile', 4)) {
+          if (b.every('missile', 1.5)) {
             for (let i = 0; i < 6; i++) {
               const p = b.point(i < 3 ? 25 + i * 15 : 128 + (i - 3) * 15, 35);
               B.add(p.x, p.y, -DOWN + (i < 3 ? -0.9 : 0.9), 180, 'missile', { homing: 1.8, turn: 2.8, trail: '255,60,80' });
@@ -378,7 +374,7 @@ const BOSS_DEFS = [
     phases: [
       {
         name: '聖者',
-        hp: 1300,
+        hp:2200,
         flash: '255,220,120',
         attack(b, B) {
           const halo = b.point(72, 29), hand = b.point(19, 34), heart = b.point(87, 50);
@@ -394,7 +390,7 @@ const BOSS_DEFS = [
       },
       {
         name: '殉教の焔',
-        hp: 1700,
+        hp: 2500,
         tint: 'rgba(200,10,30,0.38)',
         aura: '255,90,40',
         flash: '255,60,40',
@@ -409,13 +405,13 @@ const BOSS_DEFS = [
             b.vars.dir = b.vars.dir === 1 ? -1 : 1;
             const from = () => b.point(116, 18);
             const p = from();
-            B.laser({ from, angle: b.aim(p) - 0.55 * b.vars.dir, sweep: 0.45 * b.vars.dir, warn: 1.0, dur: 2.4, width: 22, color: '255,120,40' });
+            B.laser({ from, angle: b.aim(p) - 0.50 * b.vars.dir, sweep: 0.30 * b.vars.dir, warn: 1.0, dur: 2.4, width: 22, color: '255,120,40' });
           }
         },
       },
       {
         name: '堕ちたる聖者',
-        hp: 2000,
+        hp: 3000,
         tint: 'rgba(40,0,70,0.62)',
         aura: '170,60,255',
         flash: '160,40,255',
